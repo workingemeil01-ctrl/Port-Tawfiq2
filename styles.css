@@ -1,0 +1,170 @@
+/* المتغيرات الأساسية */
+:root {
+  --gold: #c5a059;
+  --gold-light: #e3c689; /* لون ذهبي أفتح للمعان */
+  --navy: #0a1233;
+  --bg-light: #ffffff;
+  --text-dark: #1a1a1a;
+  --gray: #f8f9fa;
+}
+
+body.light-theme {
+  background: var(--bg-light); color: var(--text-dark); font-family: 'Cairo', sans-serif; margin: 0;
+  overflow-x: hidden; /* منع السكرول الأفقي للصفحة كاملة */
+}
+
+/* --- Header & Menu --- */
+.header {
+  position: fixed; top: 0; width: 100%; z-index: 100; padding: 15px 20px;
+  background: rgba(255,255,255,0.8); backdrop-filter: blur(15px); /* زيادة التمويه */
+  border-bottom: 1px solid rgba(197, 160, 89, 0.2); /* خط ذهبي خفيف جدا تحت الهيدر */
+  transition: all 0.3s ease;
+}
+.header-inner { display: flex; justify-content: space-between; align-items: center; }
+
+.menu-btn span { width: 25px; height: 2px; background: var(--navy); transition: 0.3s; }
+.menu-btn:hover span { background: var(--gold); width: 30px; } /* حركة بسيطة عند الوقوف على المنيو */
+
+.brand-name { font-weight: 900; color: var(--navy); font-size: 1.1rem; }
+
+/* زر الواتساب العلوي مع لمعة */
+.wa-top-btn {
+  background: var(--gold); color: white; padding: 8px 15px; border-radius: 20px;
+  text-decoration: none; display: flex; align-items: center; gap: 5px; font-weight: 700;
+  position: relative; overflow: hidden; transition: transform 0.3s ease;
+}
+.wa-top-btn:hover { transform: translateY(-2px); }
+/* تأثير اللمعة الذهبية */
+.shimmer-effect::after {
+  content: ''; position: absolute; top: 0; left: -100%; width: 100%; height: 100%;
+  background: linear-gradient(90deg, transparent, rgba(255,255,255,0.4), transparent);
+  animation: shimmer 3s infinite;
+}
+@keyframes shimmer { 100% { left: 100%; } }
+
+
+/* --- Hero Section --- */
+.hero {
+  height: 85vh; position: relative; display: flex; align-items: center; justify-content: center; text-align: center;
+}
+/* خلفية مؤقتة - استبدلها بصورتك */
+.hero-bg.placeholder { position: absolute; inset:0; background: linear-gradient(rgba(10,18,51,0.4), rgba(10,18,51,0.4)), url('https://placehold.co/800x1200/0a1233/c5a059?text=Hero+Image'); background-size: cover; background-position: center; }
+.hero-content { position: relative; z-index: 2; color: white; padding: 20px; }
+.hero-content h1 { font-size: 2.8rem; font-weight: 900; line-height: 1.2; margin-bottom: 10px; }
+.hero-content h1 span { color: var(--gold); }
+.hero-content p { font-size: 1.2rem; opacity: 0.9; margin-bottom: 30px; }
+
+/* أنيميشن دخول النصوص */
+.fade-in-up { opacity: 0; transform: translateY(30px); animation: fadeInUp 1s cubic-bezier(0.25, 0.46, 0.45, 0.94) forwards; }
+.delay-1 { animation-delay: 0.3s; }
+.delay-2 { animation-delay: 0.6s; }
+@keyframes fadeInUp { to { opacity: 1; transform: translateY(0); } }
+
+/* --- الزر الذهبي الرئيسي مع حدود متحركة --- */
+.btn-gold {
+  display: inline-block; padding: 15px 40px; background: var(--gold); color: white;
+  border-radius: 50px; text-decoration: none; font-weight: 700; font-size: 1.1rem;
+  position: relative; z-index: 1; transition: all 0.3s ease;
+  box-shadow: 0 10px 20px -10px rgba(197, 160, 89, 0.5); /* ظل ذهبي */
+}
+.btn-gold:hover { transform: translateY(-3px); box-shadow: 0 15px 25px -10px rgba(197, 160, 89, 0.7); }
+
+/* تأثير الحدود المتحركة */
+.animate-border::before {
+  content: ''; position: absolute; inset: -3px; /* حجم الحدود */
+  background: linear-gradient(45deg, var(--gold), var(--gold-light), var(--gold));
+  background-size: 200% 200%; z-index: -1; border-radius: 50px;
+  animation: gradientBorder 3s ease infinite; opacity: 0.7;
+}
+@keyframes gradientBorder {
+  0% { background-position: 0% 50%; } 50% { background-position: 100% 50%; } 100% { background-position: 0% 50%; }
+}
+
+
+/* --- Sections & Titles --- */
+.section { padding: 60px 0; }
+.section-head { text-align: center; margin-bottom: 40px; }
+.section-head h2 { font-size: 2rem; color: var(--navy); position: relative; display: inline-block; }
+/* خط ذهبي صغير تحت العناوين */
+.section-head h2::after {
+  content: ''; display: block; width: 60px; height: 3px; background: var(--gold);
+  margin: 15px auto 0; border-radius: 2px;
+}
+
+
+/* --- Horizontal Scroll Cards (احترافي) --- */
+.horizontal-scroll {
+  display: flex; overflow-x: auto; gap: 25px; padding: 20px 25px 50px; /* Padding bottom للظل */
+  scroll-snap-type: x mandatory; -webkit-overflow-scrolling: touch;
+  scrollbar-width: none; /* إخفاء السكرول بار */
+}
+.horizontal-scroll::-webkit-scrollbar { display: none; }
+
+.luxury-card {
+  min-width: 85%; /* عرض الكارت على الموبايل */
+  scroll-snap-align: center; background: white; border-radius: 25px; overflow: hidden;
+  box-shadow: 0 15px 40px rgba(0,0,0,0.05); transition: all 0.4s cubic-bezier(0.25, 0.8, 0.25, 1);
+  border: 1px solid rgba(0,0,0,0.03);
+}
+/* تأثير عند الضغط أو الوقوف على الكارت */
+.luxury-card:hover, .luxury-card:active {
+  transform: translateY(-10px) scale(1.02);
+  box-shadow: 0 25px 50px rgba(197, 160, 89, 0.15); /* ظل ذهبي خفيف */
+}
+
+.card-img { height: 220px; background: #eee; position: relative; }
+.card-img::after { content:''; position:absolute; inset:0; background: linear-gradient(to top, rgba(0,0,0,0.4), transparent); }
+
+.card-details { padding: 25px; text-align: right; }
+.card-details h3 { color: var(--navy); margin: 0 0 10px; font-size: 1.4rem; }
+.price { color: var(--text-dark); font-weight: 600; margin-bottom: 20px; }
+.price span { color: var(--gold); font-size: 1.3rem; font-weight: 900; }
+.detail-link {
+  color: var(--gold); text-decoration: none; font-weight: 700; display: flex; align-items: center; gap: 10px; transition: 0.3s;
+}
+.detail-link:hover { gap: 15px; } /* السهم يتحرك */
+
+
+/* --- Features Section --- */
+.luxury-features { display: flex; justify-content: center; gap: 30px; flex-wrap: wrap; padding: 0 20px; }
+.feat-item { text-align: center; width: 140px; }
+.circle-img {
+  width: 120px; height: 120px; border-radius: 50%; background: #eee; margin: 0 auto 20px;
+  border: 3px solid white; box-shadow: 0 10px 30px rgba(0,0,0,0.08); position: relative;
+  transition: 0.4s ease;
+}
+/* حلقة ذهبية تظهر عند الوقوف */
+.feat-item:hover .circle-img { transform: scale(1.1); border-color: var(--gold); }
+.feat-item h4 { color: var(--navy); font-size: 1.1rem; }
+
+
+/* --- Footer --- */
+.footer { text-align: center; padding: 50px 20px; background: #fbfbfb; border-top: 5px solid var(--gold); }
+.footer p { color: #666; margin: 10px 0; }
+.contact-num { font-size: 1.3rem; font-weight: 700; color: var(--navy); dir: ltr; }
+
+
+/* --- WA FAB & Pulse --- */
+.wa-fab {
+  position: fixed; bottom: 25px; left: 25px; width: 65px; height: 65px;
+  background: #25d366; border-radius: 50%; display: grid; place-items: center;
+  box-shadow: 0 10px 30px rgba(37, 211, 102, 0.4); z-index: 99; transition: 0.3s;
+}
+.wa-fab:hover { transform: scale(1.1); }
+.wa-fab img { width: 38px; }
+/* أنيميشن النبض */
+.pulse-animation::before, .pulse-animation::after {
+  content: ''; position: absolute; inset: 0; border-radius: 50%; background: #25d366; opacity: 0.6; z-index: -1;
+}
+.pulse-animation::before { animation: pulse 2s ease-out infinite; }
+.pulse-animation::after { animation: pulse 2s 1s ease-out infinite; }
+@keyframes pulse { 100% { transform: scale(2); opacity: 0; } }
+
+
+/* --- Menu Overlay (نفس القديم) --- */
+.menu-overlay { position: fixed; inset: 0; background: rgba(10, 18, 51, 0.95); backdrop-filter: blur(10px); z-index: 200; display: none; align-items: center; justify-content: center; opacity: 0; transition: 0.4s; }
+.menu-overlay.active { opacity: 1; } /* كلاس للظهور الناعم */
+.side-menu a { display: block; color: white; font-size: 1.8rem; text-decoration: none; margin: 25px 0; font-weight: 700; transition: 0.3s; transform: translateY(20px); opacity: 0; }
+.menu-overlay.active .side-menu a { transform: translateY(0); opacity: 1; } /* ظهور الروابط بالتدريج */
+.side-menu a:hover { color: var(--gold); transform: scale(1.1); }
+.close-menu { position: absolute; top: 30px; left: 30px; background: none; border: none; color: white; font-size: 2rem; cursor: pointer; }

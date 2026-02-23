@@ -1,0 +1,118 @@
+<!doctype html>
+<html lang="ar" dir="rtl">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+  <meta name="theme-color" content="#ffffff" />
+  <title>شاليهات بورتوفيق - إقامة فاخرة</title>
+  <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;600;700;900&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://unpkg.com/aos@next/dist/aos.css" />
+  <link rel="stylesheet" href="styles.css" />
+</head>
+
+<body class="light-theme">
+  <div class="menu-overlay" id="menuOverlay">
+    <nav class="side-menu">
+      <button class="close-menu" id="closeMenu">✕</button>
+      <a href="#home">الرئيسية</a>
+      <a href="#prices">شاليهاتنا</a>
+      <a href="#stay">عن المكان</a>
+      <a href="#booking">تواصل معنا</a>
+    </nav>
+  </div>
+
+  <header class="header">
+    <div class="header-inner">
+      <button class="menu-btn" id="openMenu">
+        <span></span><span></span><span></span>
+      </button>
+      
+      <div class="brand-center">
+        <span class="brand-name">شاليهات بورتوفيق</span>
+      </div>
+
+      <a href="https://wa.me/201064800205" class="wa-top-btn shimmer-effect">
+        <svg viewBox="0 0 32 32" width="20"><path fill="currentColor" d="M19.1 17.6c-.3-.2-1.8-.9-2.1-1s-.5-.2-.7.2-.8 1-.9 1.2-.3.3-.6.1c-.3-.2-1.2-.4-2.3-1.4-.8-.7-1.4-1.6-1.6-1.9-.2-.3 0-.5.1-.6l.4-.5c.2-.2.2-.3.3-.5.1-.2 0-.4 0-.5s-.7-1.7-.9-2.3c-.2-.6-.5-.5-.7-.5h-.6c-.2 0-.5.1-.8.4s-1.1 1-1.1 2.5 1.1 3 1.2 3.2c.2.2 2.2 3.4 5.4 4.8.8.3 1.4.5 1.9.6.8.2 1.6.2 2.2.1.7-.1 1.8-.7 2.1-1.4.3-.7.3-1.3.2-1.4s-.3-.2-.6-.3Z"/></svg>
+        <span>حجز</span>
+      </a>
+    </div>
+  </header>
+
+  <main class="page">
+    <section class="hero" id="home">
+      <div class="hero-bg placeholder"></div> 
+      <div class="hero-content">
+        <h1 class="fade-in-up">استجمامك الفاخر<br>على <span>ضفاف القناة</span></h1>
+        <p class="fade-in-up delay-1">حيث تلتقي الراحة بجمال الطبيعة</p>
+        <a href="#prices" class="btn-gold animate-border fade-in-up delay-2">اكتشف الشاليهات</a>
+      </div>
+    </section>
+
+    <section class="section" id="prices">
+      <div class="section-head" data-aos="fade-up">
+        <h2>اختر وحدتك المميزة</h2>
+      </div>
+      
+      <div class="horizontal-scroll" data-aos="fade-left" data-aos-delay="200">
+        <article class="luxury-card">
+          <div class="card-img placeholder"></div>
+          <div class="card-details">
+            <h3>شاليه الغروب الملكي</h3>
+            <p class="price">يبدأ من <span>٢٥٠٠ ج.م</span> / ليلة</p>
+            <a href="#" class="detail-link">عرض التفاصيل والحجز ←</a>
+          </div>
+        </article>
+        <article class="luxury-card">
+          <div class="card-img placeholder"></div>
+          <div class="card-details">
+            <h3>شاليه النسيم العائلي</h3>
+            <p class="price">يبدأ من <span>١٨٠٠ ج.م</span> / ليلة</p>
+            <a href="#" class="detail-link">عرض التفاصيل والحجز ←</a>
+          </div>
+        </article>
+        <article class="luxury-card">
+          <div class="card-img placeholder"></div>
+          <div class="card-details">
+            <h3>شاليه البانوراما</h3>
+            <p class="price">يبدأ من <span>٣٠٠٠ ج.م</span> / ليلة</p>
+            <a href="#" class="detail-link">عرض التفاصيل والحجز ←</a>
+          </div>
+        </article>
+      </div>
+    </section>
+
+    <section class="section" id="stay">
+      <div class="section-head" data-aos="fade-up">
+        <h2>تجربة لا تُنسى</h2>
+      </div>
+      <div class="luxury-features">
+        <div class="feat-item" data-aos="zoom-in" data-aos-delay="100">
+          <div class="circle-img placeholder"></div>
+          <h4>شاطئ خاص وهادئ</h4>
+        </div>
+        <div class="feat-item" data-aos="zoom-in" data-aos-delay="300">
+          <div class="circle-img placeholder"></div>
+          <h4>إطلالات بانورامية</h4>
+        </div>
+        <div class="feat-item" data-aos="zoom-in" data-aos-delay="500">
+          <div class="circle-img placeholder"></div>
+          <h4>خدمة فندقية راقية</h4>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer class="footer" data-aos="fade" data-aos-offset="0">
+    <span class="brand-name" style="color:var(--gold); font-size: 1.5rem;">شاليهات بورتوفيق</span>
+    <p>بورتوفيق، بجوار نادي التجديف</p>
+    <p class="contact-num">01064800205 <span style="color:var(--gold)">📞</span></p>
+  </footer>
+
+  <a class="wa-fab pulse-animation" href="https://wa.me/201064800205">
+    <img src="https://upload.wikimedia.org/wikipedia/commons/6/6b/WhatsApp.svg" alt="WA">
+  </a>
+
+  <script src="https://unpkg.com/aos@next/dist/aos.js"></script>
+  <script src="app.js"></script>
+</body>
+</html>
