@@ -1,55 +1,77 @@
-// تشغيل مكتبة أنيميشن التمرير (AOS)
-// duration: مدة الأنيميشن بالمللي ثانية
-// once: true يعني الأنيميشن يشتغل مرة واحدة بس لما العنصر يظهر
-AOS.init({
-  duration: 800,
-  easing: 'ease-in-out',
-  once: true,
-  mirror: false
-});
+(() => {
+  const topbar = document.getElementById("topbar");
 
-// التحكم في القائمة الجانبية بأنيميشن
-const openBtn = document.getElementById('openMenu');
-const closeBtn = document.getElementById('closeMenu');
-const overlay = document.getElementById('menuOverlay');
-const menuLinks = document.querySelectorAll('.side-menu a');
+  // ===== sticky header style on scroll =====
+  const onScroll = () => {
+    if (!topbar) return;
+    topbar.classList.toggle("is-scrolled", window.scrollY > 6);
+  };
+  window.addEventListener("scroll", onScroll, { passive: true });
+  onScroll();
 
-function openMenu() {
-  overlay.style.display = 'flex';
-  // تأخير بسيط عشان الـ CSS transition يشتغل
-  setTimeout(() => {
-    overlay.classList.add('active');
-    // ظهور الروابط واحد تلو الآخر
-    menuLinks.forEach((link, index) => {
-      link.style.transitionDelay = `${index * 0.1 + 0.2}s`;
-    });
-  }, 10);
-}
+  // ===== drawer =====
+  const drawer = document.getElementById("drawer");
+  const overlay = document.getElementById("drawerOverlay");
+  const openBtn = document.getElementById("openDrawer");
+  const closeBtn = document.getElementById("closeDrawer");
 
-function closeMenuFunc() {
-  overlay.classList.remove('active');
-  menuLinks.forEach(link => link.style.transitionDelay = '0s');
-  // انتظار انتهاء الأنيميشن قبل الإخفاء
-  setTimeout(() => {
-    overlay.style.display = 'none';
-  }, 400);
-}
+  const openDrawer = () => {
+    drawer.classList.add("is-open");
+    overlay.classList.add("is-open");
+    drawer.setAttribute("aria-hidden", "false");
+    overlay.setAttribute("aria-hidden", "false");
+    document.body.style.overflow = "hidden";
+  };
 
-openBtn.onclick = openMenu;
-closeBtn.onclick = closeMenuFunc;
+  const closeDrawer = () => {
+    drawer.classList.remove("is-open");
+    overlay.classList.remove("is-open");
+    drawer.setAttribute("aria-hidden", "true");
+    overlay.setAttribute("aria-hidden", "true");
+    document.body.style.overflow = "";
+  };
 
-document.querySelectorAll('.side-menu a').forEach(link => {
-  link.onclick = closeMenuFunc;
-});
+  openBtn?.addEventListener("click", openDrawer);
+  closeBtn?.addEventListener("click", closeDrawer);
+  overlay?.addEventListener("click", closeDrawer);
+  document.addEventListener("keydown", (e) => {
+    if (e.key === "Escape") closeDrawer();
+  });
 
-// (اختياري) تغيير لون الهيدر عند التمرير
-window.addEventListener('scroll', () => {
-  const header = document.querySelector('.header');
-  if (window.scrollY > 50) {
-    header.style.background = 'rgba(255,255,255,0.95)';
-    header.style.boxShadow = '0 4px 20px rgba(0,0,0,0.05)';
-  } else {
-    header.style.background = 'rgba(255,255,255,0.8)';
-    header.style.boxShadow = 'none';
+  // close drawer when clicking a link
+  document.querySelectorAll(".drawer-link").forEach(a => {
+    a.addEventListener("click", () => closeDrawer());
+  });
+
+  // ===== carousel dots =====
+  const carousel = document.getElementById("carousel");
+  const dots = Array.from(document.querySelectorAll(".dot"));
+
+  const setDot = (idx) => {
+    dots.forEach((d, i) => d.classList.toggle("is-on", i === idx));
+  };
+
+  if (carousel && dots.length) {
+    const cards = Array.from(carousel.querySelectorAll(".chalet-card"));
+    const obs = new IntersectionObserver((entries) => {
+      const visible = entries.filter(e => e.isIntersecting)
+        .sort((a,b) => b.intersectionRatio - a.intersectionRatio)[0];
+      if (!visible) return;
+      const idx = cards.indexOf(visible.target);
+      if (idx >= 0) setDot(idx);
+    }, { root: carousel, threshold: [0.55, 0.7, 0.85] });
+
+    cards.forEach(c => obs.observe(c));
   }
-});
+
+  // ===== WhatsApp link placeholder (هتغيره بعدين) =====
+  // ضع رقمك هنا لاحقًا: https://wa.me/2XXXXXXXXXXX
+  const waFab = document.getElementById("waFab");
+  const quickWa = document.getElementById("quickWa");
+  // مثال جاهز (غير الرقم):
+  // const waLink = "https://wa.me/201064800205";
+  const waLink = "#";
+
+  if (waFab) waFab.href = waLink;
+  if (quickWa) quickWa.href = waLink;
+})();
