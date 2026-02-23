@@ -60,7 +60,7 @@
   }
 
   // WhatsApp link placeholder
-  // حط الرقم بعدين:
+  // غيره بعدين:
   // const waLink = "https://wa.me/2010XXXXXXXX";
   const waLink = "#";
   const waFab = document.getElementById("waFab");
@@ -68,35 +68,43 @@
   if (waFab) waFab.href = waLink;
   if (quickWa) quickWa.href = waLink;
 
-  // ---- HERO image loader (bck1.*) ----
-  const heroMedia = document.getElementById("heroMedia");
+  // ===== robust image background loader (tries relative + absolute) =====
   function tryBg(el, baseName, exts) {
+    const candidates = [];
+    exts.forEach(ext => {
+      candidates.push(`${baseName}${ext}`);
+      candidates.push(`/${baseName}${ext}`); // for Vercel/public root
+    });
+
     let i = 0;
     const probe = new Image();
+
     const next = () => {
-      if (i >= exts.length) return;
-      const url = `${baseName}${exts[i++]}`;
+      if (i >= candidates.length) return;
+      const url = candidates[i++];
       probe.onload = () => { el.style.backgroundImage = `url("${url}")`; };
       probe.onerror = next;
       probe.src = url;
     };
+
     next();
   }
+
+  // HERO image (bck1.*)
+  const heroMedia = document.getElementById("heroMedia");
   if (heroMedia) {
+    // لو عندك heic بس، حط jpg جنبها كـ fallback
     tryBg(heroMedia, "bck1", [".heic", ".jpg", ".jpeg", ".png", ".webp"]);
   }
 
-  // ---- Experience circles images (exp1/exp2/exp3.*) ----
-  const exps = [
+  // Experience circles
+  [
     { id: "exp1", base: "exp1" },
     { id: "exp2", base: "exp2" },
     { id: "exp3", base: "exp3" },
-  ];
-
-  exps.forEach(item => {
+  ].forEach(item => {
     const el = document.getElementById(item.id);
     if (!el) return;
     tryBg(el, item.base, [".heic", ".jpg", ".jpeg", ".png", ".webp"]);
   });
 })();
-
