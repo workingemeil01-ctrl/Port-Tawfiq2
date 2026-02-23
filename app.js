@@ -83,7 +83,7 @@
     next();
   }
   if (heroMedia) {
-    tryBg(heroMedia, "bck1", [".jpg",".jpeg",".png",".webp"]);
+    tryBg(heroMedia, "bck1", [".heic", ".jpg", ".jpeg", ".png", ".webp"]);
   }
 
   // ---- Experience circles images (exp1/exp2/exp3.*) ----
@@ -96,6 +96,7 @@
   exps.forEach(item => {
     const el = document.getElementById(item.id);
     if (!el) return;
-    tryBg(el, item.base, [".jpg",".jpeg",".png",".webp"]);
+    tryBg(el, item.base, [".heic", ".jpg", ".jpeg", ".png", ".webp"]);
   });
 })();
+
